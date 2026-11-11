@@ -82,8 +82,10 @@ expression scoped [variable] %$objects% [([with]in|from|by) (1:%-script%|2:curre
         remove change values from variable "%{_sv::ctx::1}%scoped::%{_sv::ctx::2}%" with custom-event event
 
     remove all:
+        # to fix skminestom set change values to a list
+        set {_sv::val::*} to change values
         set {_sv::ctx::*} to scoped_ctx({_sv::origin}, event, {_sv::var}, expr-2, parse mark)
-        remove all change values from variable "%{_sv::ctx::1}%scoped::%{_sv::ctx::2}%" with custom-event event
+        remove all {_sv::val::*} from variable "%{_sv::ctx::1}%scoped::%{_sv::ctx::2}%" with custom-event event
 
     delete:
         set {_sv::ctx::*} to scoped_ctx({_sv::origin}, event, {_sv::var}, expr-2, parse mark)
